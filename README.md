@@ -37,7 +37,7 @@ If you have access to the internet from Catalyst Center, you can clone the repos
 
 ```text
 maglev@x.x.x.x (maglev-master-x-x-x-x) ~
-$ git clone https://github.com/CiscoDevNet/cc-assist
+$ git clone https://github.com/moepatelcisco/cc-assist.git
 ```
 
 ## Option 2. git clone via proxy
@@ -48,7 +48,7 @@ NOTE: please do not set a permanent environment variable as this will stop you f
 The example below uses an inline environment variable, just for the git command. Make sure to put in the correct proxy url (including port)
 ```text
 maglev@x.x.x.x (maglev-master-x-x-x-x) ~
-$ https_proxy=https://<your proxy> git clone https://github.com/CiscoDevNet/cc-assist
+$ https_proxy=http://proxy-wsa.esl.cisco.com:80 git clone https://github.com/moepatelcisco/cc-assist.git
 ```
 
 ## Option 3. Isolated environment

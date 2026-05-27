@@ -48,7 +48,7 @@ NOTE: please do not set a permanent environment variable as this will stop you f
 The example below uses an inline environment variable, just for the git command. Make sure to put in the correct proxy url (including port)
 ```text
 maglev@x.x.x.x (maglev-master-x-x-x-x) ~
-$ https_proxy=http://proxy-wsa.esl.cisco.com:80 git clone https://github.com/moepatelcisco/cc-assist.git
+$ https_proxy=http://<your proxy> git clone https://github.com/moepatelcisco/cc-assist.git
 ```
 
 ## Option 3. Isolated environment

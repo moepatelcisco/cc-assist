@@ -189,7 +189,7 @@ The tailing option can be started and stopped from this menu. CC-Assist warns be
 
 All fabrics automatically saves the output as CSV. Specific fabric/zone, hostname, and VLAN ID selections display the matching rows in the terminal and remind the user to use the All fabrics option when CSV export is needed.
 
-The Static Assignment Ports with mismatch option displays ports where Catalyst Center static assignment values differ from the device interface state for VLAN, port mode, or description.
+The Static Assignment Ports with mismatch option checks ports where Catalyst Center static assignment values differ from the device interface state for VLAN, port mode, or description. If 10 or fewer mismatches are found, the rows are displayed in the terminal. If more than 10 mismatches are found, the output is saved to CSV.
 
 ## Audit Logs
 

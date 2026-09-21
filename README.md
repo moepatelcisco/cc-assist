@@ -2,9 +2,9 @@
 
 CC-Assist is a Cisco Catalyst Center support utility for collecting troubleshooting data from a Catalyst Center node. It packages commonly needed database exports, service logs, tailing logs, SPR data, audit logs, and SPF diagnostic output into timestamped archives under the current working directory.
 
-Current user-facing version: `Version 3.0.1-08.28.26`
+Current user-facing version: `Version 3.0.1-09.21.26`
 
-Document updated: September 1, 2026
+Document updated: September 21, 2026
 
 ## What It Collects
 
@@ -24,6 +24,7 @@ It also includes Utilities for:
 - SPR collection for selected namespace/version data
 - Audit log export from MongoDB, with JSON and XLSX output
 - SPF Diagnostic collection by task ID
+- Device Configuration History lookup by hostname and date/time range
 
 ## Where Output Is Saved
 
@@ -49,6 +50,7 @@ tail_logs_<timestamp>.tar.gz
 spr_<timestamp>.tar.gz
 audit_logs_<timestamp>.tar.gz
 spf_diagnostic_logs_<timestamp>.tar.gz
+device_config_history_<timestamp>.tar.gz
 ```
 
 ## Installation
@@ -58,16 +60,16 @@ This executable needs to be downloaded onto Cisco Catalyst Center.
 
 There are three ways of doing this, depending on access from Catalyst Center to the internet
 
-## Method 1. git clone direct
+## Option 1. git clone direct
 
 If you have access to the internet from Catalyst Center, you can clone the repository (containing the executable) directly from Catalyst Center cli:
 
-```shel
+```shell
 maglev@x.x.x.x (maglev-master-x-x-x-x) ~
 $ git clone https://github.com/moepatelcisco/cc-assist.git
 ```
 
-## Method 2. git clone via proxy
+## Option 2. git clone via proxy
 
 If Catalyst Center needs a proxy to get to the internet, you will need to provide a proxy for git command.
 
@@ -80,7 +82,7 @@ maglev@x.x.x.x (maglev-master-x-x-x-x) ~
 $ https_proxy=http://<your proxy> git clone https://github.com/moepatelcisco/cc-assist.git
 ```
 
-## Method 3. Isolated environment
+## Option 3. Isolated environment
 
 You will need to clone (using method 1 or 2) to an intermediate machine and copy to Catalyst Center, using scp. Remember to use port 2222 with the -P option to scp.
 ```
@@ -158,9 +160,36 @@ The tailing option can be started and stopped from this menu. CC-Assist warns be
 1 -> SPR
 2 -> Audit Logs
 3 -> SPF Diagnostic
-4 -> Main Menu
+4 -> Device Configuration History
+5 -> Host Onboarding Data
+6 -> Main Menu
+7 -> Exit
+```
+
+## Host Onboarding Data
+
+```text
+1 -> Fabric Ports with Static Assignment
+2 -> Static Assignment Ports with mismatch (vlanid, portmode, description)
+3 -> Fabric Port-Channels (Coming soon)
+4 -> Utilities Menu
 5 -> Exit
 ```
+
+### Fabric Ports with Static Assignment
+
+```text
+1 -> All fabrics
+2 -> Specific fabric/zone
+3 -> Hostname
+4 -> VLAN ID
+5 -> Host Onboarding Data Menu
+6 -> Exit
+```
+
+All fabrics automatically saves the output as CSV. Specific fabric/zone, hostname, and VLAN ID selections display the matching rows in the terminal and remind the user to use the All fabrics option when CSV export is needed.
+
+The Static Assignment Ports with mismatch option displays ports where Catalyst Center static assignment values differ from the device interface state for VLAN, port mode, or description.
 
 ## Audit Logs
 
@@ -197,6 +226,43 @@ Shows recent deployed task IDs with readable service context when available. By 
 ### Manually Enter TaskId
 
 Allows up to three task IDs at a time, separated by commas. Enter `B` or `back` to return to the SPF Diagnostic menu.
+
+## Device Configuration History
+
+Device Configuration History lists available configuration history entries for a device hostname within a requested date/time range. Hostname matching is case-insensitive, and only entries with added, updated, or deleted configuration lines are displayed.
+
+```text
+1 -> List Device Configuration History
+2 -> Utilities Menu
+3 -> Exit
+```
+
+List prompts:
+
+```text
+Enter device hostname or B to go back:
+Enter start date/time [YYYY-MM-DD or YYYY-MM-DD HH:MM] or B to go back:
+Enter end date/time [YYYY-MM-DD or YYYY-MM-DD HH:MM] or B to go back:
+```
+
+After the history and changed config entries are displayed, the action menu appears:
+
+```text
+1 -> Show Running Config Diff
+2 -> Retrieve device config
+3 -> Device Configuration History Menu
+4 -> Exit
+```
+
+Action prompt:
+
+```text
+Enter configversion_id or B to go back:
+```
+
+A date-only start value begins at `00:00:00.000000`. A date-only end value includes the full day. A date/time value entered through minutes includes that minute in the range.
+
+CC-Assist prints a readable history summary and changed config summary in the terminal, then saves CSV output in a timestamped archive. The diff option fetches the previous and current running-config content for the selected config version, prints a unified diff, and saves both configs plus the diff. The retrieve option prints and saves the full running config for the selected config version.
 
 ## Status Colors
 

@@ -170,7 +170,7 @@ The tailing option can be started and stopped from this menu. CC-Assist warns be
 
 ```text
 1 -> Fabric Ports with Static Assignment
-2 -> Static Assignment Ports with mismatch (vlanid, portmode, description)
+2 -> Static Assignment Ports with mismatch (data/voice vlan, portmode, description)
 3 -> Fabric Port-Channels (Coming soon)
 4 -> Utilities Menu
 5 -> Exit
@@ -187,9 +187,9 @@ The tailing option can be started and stopped from this menu. CC-Assist warns be
 6 -> Exit
 ```
 
-All fabrics automatically saves the output as CSV. Specific fabric/zone, hostname, and VLAN ID selections display the matching rows in the terminal and remind the user to use the All fabrics option when CSV export is needed.
+All fabrics automatically saves the output as CSV. Specific fabric/zone, hostname, and VLAN ID selections display the matching rows in the terminal and remind the user to use the All fabrics option when CSV export is needed. Static assignment output includes data VLAN columns (`data_vlanname`, `data_vlanid`) and voice VLAN columns (`voice_vlanname`, `voice_vlanid`).
 
-The Static Assignment Ports with mismatch option checks ports where Catalyst Center static assignment values differ from the device interface state for VLAN, port mode, or description. If 10 or fewer mismatches are found, the rows are displayed in the terminal. If more than 10 mismatches are found, the output is saved to CSV.
+The Static Assignment Ports with mismatch option checks ports where Catalyst Center static assignment values differ from the device interface state for data VLAN, voice VLAN, port mode, or description. If 10 or fewer mismatches are found, the rows are displayed in the terminal with mismatched device-side values highlighted in red. If more than 10 mismatches are found, the output is saved to CSV.
 
 ## Audit Logs
 

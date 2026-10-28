@@ -2,9 +2,15 @@
 
 CC-Assist is a Cisco Catalyst Center support utility for collecting troubleshooting data from a Catalyst Center node. It packages commonly needed database exports, service logs, tailing logs, SPR data, audit logs, and SPF diagnostic output into timestamped archives under the current working directory.
 
-Current user-facing version: `Version 3.0.1-09.21.26`
+Current user-facing version: `Version 3.0.1-10.28.26`
 
-Document updated: September 21, 2026
+Document updated: October 28, 2026
+
+## Latest Release
+
+- Expanded SDA-Wired multicast collection with two additional database exports, bringing the bundle to 93 table exports.
+- Rebuilt the Linux x86_64 executable for `Version 3.0.1-10.28.26`.
+- Verified the same executable with full SDA-Wired collection on both lab nodes, covering the legacy and modern release profiles. Both runs generated all 93 table exports and four configured service logs. The two additional exports were also checked for valid CSV headers; they contained no data rows on the modern-profile lab node.
 
 ## What It Collects
 
@@ -25,6 +31,7 @@ It also includes Utilities for:
 - Audit log export from MongoDB, with JSON and XLSX output
 - SPF Diagnostic collection by task ID
 - Device Configuration History lookup by hostname and date/time range
+- Host Onboarding Data for static fabric port assignments and device-state mismatches
 
 ## Where Output Is Saved
 
@@ -51,6 +58,10 @@ spr_<timestamp>.tar.gz
 audit_logs_<timestamp>.tar.gz
 spf_diagnostic_logs_<timestamp>.tar.gz
 device_config_history_<timestamp>.tar.gz
+device_config_diff_<timestamp>.tar.gz
+device_config_retrieve_<timestamp>.tar.gz
+host_onboarding_static_assignment_<timestamp>.tar.gz
+host_onboarding_static_assignment_mismatch_<timestamp>.tar.gz
 ```
 
 ## Installation
@@ -95,6 +106,8 @@ x.x.x.x is CatC IP adddress
 ## Running On Catalyst Center
 
 Copy the Linux executable named `cc-assist` to the Catalyst Center node and run it as the `maglev` user.
+
+Use a Linux x86_64 Catalyst Center node with unrestricted shell access. The selected release profile must have permission to execute its database and service-log commands.
 
 ```bash
 chmod +x cc-assist

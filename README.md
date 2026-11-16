@@ -2,15 +2,15 @@
 
 CC-Assist is a Cisco Catalyst Center support utility for collecting troubleshooting data from a Catalyst Center node. It packages commonly needed database exports, service logs, tailing logs, SPR data, audit logs, and SPF diagnostic output into timestamped archives under the current working directory.
 
-Current user-facing version: `Version 3.0.1-10.28.26`
+Current user-facing version: `Version 3.0.1-11.16.26`
 
-Document updated: October 28, 2026
+Document updated: November 16, 2026
 
 ## Latest Release
 
-- Expanded SDA-Wired multicast collection with two additional database exports, bringing the bundle to 93 table exports.
-- Rebuilt the Linux x86_64 executable for `Version 3.0.1-10.28.26`.
-- Verified the same executable with full SDA-Wired collection on both lab nodes, covering the legacy and modern release profiles. Both runs generated all 93 table exports and four configured service logs. The two additional exports were also checked for valid CSV headers; they contained no data rows on the modern-profile lab node.
+- Expanded SDA-Wired IP pool collection with four additional database exports, bringing the bundle to 97 table exports.
+- Rebuilt the Linux x86_64 executable for `Version 3.0.1-11.16.26`.
+- Verified the same executable with full SDA-Wired collection on both lab nodes, covering the legacy and modern release profiles. Both runs generated all 97 table exports and four configured service logs.
 
 ## What It Collects
 
